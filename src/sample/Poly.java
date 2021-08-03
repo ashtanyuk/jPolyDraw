@@ -26,6 +26,8 @@ class Contour {
     int minX = Integer.MAX_VALUE, maxX = 0;
     int minY = Integer.MAX_VALUE, maxY = 0;
 
+
+
     public Contour() {
     }
 
@@ -95,10 +97,18 @@ public class Poly {
     String name; // по имени файла
     ArrayList<Contour> contours = new ArrayList<>(); // список всех контуров в полигоне
     Color color = Color.CADETBLUE; // цвет по-умолчанию
-    double opacity = 0.5;
+    double opacity = 0.5; // прозрачность по-умолчанию
 
-    int minX = 2147483647, maxX = 0;
-    int minY = 2147483647, maxY = 0;
+    int minX = Integer.MAX_VALUE, maxX = 0;
+    int minY = Integer.MAX_VALUE, maxY = 0;
+
+    public int getMaxX() {
+        return maxX;
+    }
+    public int getMaxY() {
+        return maxY;
+    }
+
 
     double alphaX = 600 * 0.75;
     double alphaY = 600 * 0.75;
@@ -142,7 +152,7 @@ public class Poly {
     }
 
     // определяем мах/мин координаты по всем контурам
-    private void calcMinMax() {
+    public void calcMinMax() {
         for(Contour c: contours) {
             c.calcMinMax();
             if(minX > c.getMinX())
@@ -155,8 +165,15 @@ public class Poly {
                 maxY = c.getMaxY();
         }
     }
+
+    public void setMaxX(int maxX) {
+        this.maxX = maxX;
+    }
+    public void setMaxY(int maxY) {
+        this.maxY = maxY;
+    }
+
     public void normalize() {
-        calcMinMax();
         for(Contour c: contours) {
             c.normalize(maxX, maxY);
         }

@@ -29,6 +29,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Polygon Drawing, 2021");
 
+
         Scene scene = new Scene(root, 800, 620, Color.WHITESMOKE);
         primaryStage.setScene(scene);
         primaryStage.resizableProperty().setValue(false);

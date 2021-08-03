@@ -8,10 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Slider;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Scale;
@@ -49,6 +46,11 @@ public class Controller implements Initializable {
     Button btIncScale;
     @FXML
     Button btDecScale;
+
+    @FXML
+    TextField tfMaxX;
+    @FXML
+    TextField tfMaxY;
 
     @FXML
     ListView<String> lvPoly;
@@ -106,9 +108,12 @@ public class Controller implements Initializable {
             activeCanvas.polygons.add(poly);
 
         }
+        poly.calcMinMax();
         poly.normalize();
         poly.draw(activeCanvas.gc,scale);
         lvPoly.getItems().add(file.getName());
+        tfMaxX.setText(Integer.toString(poly.getMaxX()));
+        tfMaxY.setText(Integer.toString(poly.getMaxY()));
     }
 
     @FXML
@@ -162,6 +167,12 @@ public class Controller implements Initializable {
         defaultColors.add(Color.CADETBLUE);
         defaultColors.add(Color.BLUEVIOLET);
         bNewCanvasClick();
+        pane.setStyle("-fx-padding: 1;" +
+                "-fx-border-style: solid inside;" +
+                "-fx-border-width: 2;" +
+                "-fx-border-insets: 2;" +
+                "-fx-border-radius: 3;" +
+                "-fx-border-color: grey;");
 
 
         activeCanvas.gc.clearRect(0, 0, activeCanvas.canvas.getWidth(), activeCanvas.canvas.getHeight());
@@ -215,5 +226,26 @@ public class Controller implements Initializable {
                 p.draw(activeCanvas.gc,scale);
             }
         });
+
+        tfMaxX.textProperty().addListener(
+                (observable, oldValue, newValue) -> {
+                    int maxX = Integer.parseInt(newValue);
+                    clearCanvas();
+                    for(Poly p: activeCanvas.polygons) {
+                        p.setMaxX(maxX);
+                        p.normalize();
+                        p.draw(activeCanvas.gc,scale);
+                    }
+                });
+        tfMaxY.textProperty().addListener(
+                (observable, oldValue, newValue) -> {
+                    int maxY = Integer.parseInt(newValue);
+                    clearCanvas();
+                    for(Poly p: activeCanvas.polygons) {
+                        p.setMaxY(maxY);
+                        p.normalize();
+                        p.draw(activeCanvas.gc,scale);
+                    }
+                });
     }
 }

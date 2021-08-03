@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
@@ -43,16 +44,20 @@
                      </children>
                   </HBox>
                   <Label prefHeight="33.0" prefWidth="150.0" text="Масштаб и положение" />
-                  <HBox prefHeight="39.0" prefWidth="170.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="170.0">
                      <children>
                         <Button fx:id="btIncScale" mnemonicParsing="false" onAction="#bIncClick" prefHeight="40.0" prefWidth="39.0" text="+" />
                         <Button fx:id="btDecScale" mnemonicParsing="false" onAction="#bDecClick" prefHeight="40.0" prefWidth="42.0" text="-" />
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="56.0" text="max X" />
+                        <TextField fx:id="tfMaxX" prefHeight="25.0" prefWidth="45.0" />
                      </children>
                   </HBox>
-                  <HBox prefHeight="41.0" prefWidth="182.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="182.0">
                      <children>
                         <Button mnemonicParsing="false" prefHeight="43.0" prefWidth="39.0" text="-&gt;" />
                         <Button mnemonicParsing="false" prefHeight="41.0" prefWidth="42.0" text="&lt;-" />
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="56.0" text="max Y" />
+                        <TextField fx:id="tfMaxY" prefHeight="25.0" prefWidth="45.0" />
                      </children>
                   </HBox>
                   <Label prefHeight="30.0" prefWidth="60.0" text="Полигоны" />
