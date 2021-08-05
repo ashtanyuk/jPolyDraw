@@ -2,6 +2,7 @@ package sample;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -9,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Scale;
@@ -16,6 +18,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 
+import javax.imageio.ImageIO;
+import java.awt.image.RenderedImage;
 import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
@@ -43,6 +47,9 @@ public class Controller implements Initializable {
     @FXML
     Button bLoad;
     @FXML
+    Button bExport;
+
+    @FXML
     Button btIncScale;
     @FXML
     Button btDecScale;
@@ -67,6 +74,31 @@ public class Controller implements Initializable {
         activeCanvas.gc.clearRect(0, 0, activeCanvas.canvas.getWidth(), activeCanvas.canvas.getHeight());
         drawGrid(activeCanvas.gc,step);
     }
+
+    @FXML
+    public void bExportClick() {
+        FileChooser fileChooser = new FileChooser();
+
+        //Set extension filter
+        FileChooser.ExtensionFilter extFilter =
+                new FileChooser.ExtensionFilter("png files (*.png)", "*.png");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        //Show save file dialog
+        File file = fileChooser.showSaveDialog(new Stage());
+
+        if(file != null){
+            try {
+                WritableImage writableImage = new WritableImage((int)activeCanvas.canvas.getWidth(), (int)activeCanvas.canvas.getHeight());
+                activeCanvas.canvas.snapshot(null, writableImage);
+                RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage, null);
+                ImageIO.write(renderedImage, "png", file);
+            } catch (IOException ex) {
+                System.out.println("Ошибка сохранения png файла!");
+            }
+        }
+    }
+
 
     @FXML
     public void bNewCanvasClick() {

@@ -40,7 +40,7 @@
                   <HBox prefHeight="36.0" prefWidth="182.0" spacing="5.0">
                      <children>
                         <Button fx:id="bLoad" mnemonicParsing="false" onAction="#bLoadClick" prefHeight="35.0" prefWidth="76.0" text="Загрузить" />
-                        <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="73.0" text="Экспорт" />
+                        <Button fx:id="bExport" mnemonicParsing="false" onAction="#bExportClick" prefHeight="37.0" prefWidth="73.0" text="Экспорт" />
                      </children>
                   </HBox>
                   <Label prefHeight="33.0" prefWidth="150.0" text="Масштаб и положение" />
