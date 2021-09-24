@@ -11,18 +11,18 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
-      <HBox prefHeight="620.0" prefWidth="800.0">
+      <HBox prefHeight="1000.0" prefWidth="1500.0">
          <children>
-            <Pane fx:id="pane" prefHeight="600.0" prefWidth="600.0" style="-fx-border-color: grey;" />
-            <VBox prefHeight="620.0" prefWidth="192.0">
+            <Pane fx:id="pane" prefHeight="1000.0" prefWidth="1200.0" style="-fx-border-color: grey;" />
+            <VBox prefHeight="1000.0" prefWidth="299.0">
                <children>
                   <Label prefHeight="17.0" prefWidth="83.0" text="Канва (слои)" />
                   <HBox prefHeight="35.0" prefWidth="182.0">
                      <children>
-                        <Button fx:id="btNewCanvas" mnemonicParsing="false" onAction="#bNewCanvasClick" prefHeight="35.0" prefWidth="51.0" text="Новая" />
-                        <Button fx:id="btClearCanvas" mnemonicParsing="false" onAction="#bClearClick" prefHeight="35.0" prefWidth="70.0" text="Очистить" />
+                        <Button fx:id="btNewCanvas" mnemonicParsing="false" onAction="#bNewCanvasClick" prefHeight="35.0" prefWidth="135.0" text="Новая" />
+                        <Button fx:id="btClearCanvas" mnemonicParsing="false" onAction="#bClearClick" prefHeight="35.0" prefWidth="122.0" text="Очистить" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="27.0" prefWidth="182.0">
@@ -33,14 +33,14 @@
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="182.0">
                      <children>
-                        <ListView fx:id="lvCanvas" prefHeight="85.0" prefWidth="182.0" />
+                        <ListView fx:id="lvCanvas" prefHeight="100.0" prefWidth="284.0" />
                      </children>
                   </HBox>
                   <Label prefHeight="23.0" prefWidth="45.0" text="Файл" />
                   <HBox prefHeight="36.0" prefWidth="182.0" spacing="5.0">
                      <children>
-                        <Button fx:id="bLoad" mnemonicParsing="false" onAction="#bLoadClick" prefHeight="35.0" prefWidth="76.0" text="Загрузить" />
-                        <Button fx:id="bExport" mnemonicParsing="false" onAction="#bExportClick" prefHeight="37.0" prefWidth="73.0" text="Экспорт" />
+                        <Button fx:id="bLoad" mnemonicParsing="false" onAction="#bLoadClick" prefHeight="35.0" prefWidth="110.0" text="Загрузить" />
+                        <Button fx:id="bExport" mnemonicParsing="false" onAction="#bExportClick" prefHeight="36.0" prefWidth="98.0" text="Экспорт" />
                      </children>
                   </HBox>
                   <Label prefHeight="33.0" prefWidth="150.0" text="Масштаб и положение" />
@@ -60,12 +60,12 @@
                         <TextField fx:id="tfMaxY" prefHeight="25.0" prefWidth="45.0" />
                      </children>
                   </HBox>
-                  <Label prefHeight="30.0" prefWidth="60.0" text="Полигоны" />
+                  <Label prefHeight="30.0" prefWidth="127.0" text="Полигоны" />
                   <ListView fx:id="lvPoly" prefHeight="90.0" prefWidth="182.0" />
                   <HBox prefHeight="42.0" prefWidth="182.0">
                      <children>
-                        <ColorPicker fx:id="cpPolyColor" prefHeight="36.0" prefWidth="119.0" />
-                        <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="69.0" text="Удалить" />
+                        <ColorPicker fx:id="cpPolyColor" prefHeight="36.0" prefWidth="141.0" />
+                        <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="115.0" text="Удалить" />
                      </children>
                   </HBox>
                </children>

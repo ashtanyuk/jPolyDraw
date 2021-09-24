@@ -23,10 +23,8 @@ class Contour {
     double[] x_norm; // нормализованные значения в диапазоне 0-1
     double[] y_norm;
 
-    int minX = Integer.MAX_VALUE, maxX = 0;
-    int minY = Integer.MAX_VALUE, maxY = 0;
-
-
+    int minX = Integer.MAX_VALUE, maxX = Integer.MIN_VALUE;
+    int minY = Integer.MAX_VALUE, maxY = Integer.MIN_VALUE;
 
     public Contour() {
     }
@@ -99,8 +97,8 @@ public class Poly {
     Color color = Color.CADETBLUE; // цвет по-умолчанию
     double opacity = 0.5; // прозрачность по-умолчанию
 
-    int minX = Integer.MAX_VALUE, maxX = 0;
-    int minY = Integer.MAX_VALUE, maxY = 0;
+    int minX = Integer.MAX_VALUE, maxX = Integer.MIN_VALUE;
+    int minY = Integer.MAX_VALUE, maxY = Integer.MIN_VALUE;
 
     public int getMaxX() {
         return maxX;
@@ -110,8 +108,8 @@ public class Poly {
     }
 
 
-    double alphaX = 600 * 0.75;
-    double alphaY = 600 * 0.75;
+    double alphaX = 1000 * 0.75;
+    double alphaY = 1000 * 0.75;
 
     boolean cbegin = true;
     Contour c = null;
@@ -190,9 +188,6 @@ public class Poly {
             double y[] = c.getYArr(alphaY);
             gc.fillPolygon(x, y, x.length);
             gc.strokePolygon(x, y, x.length);
-
         }
-
     }
-
 }

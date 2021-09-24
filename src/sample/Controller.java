@@ -104,7 +104,7 @@ public class Controller implements Initializable {
     public void bNewCanvasClick() {
         ++canvasCount;
         CanvasHolder ch = new CanvasHolder();
-        ch.canvas = new Canvas(600,600);
+        ch.canvas = new Canvas(1200,1000);
         ch.color = defaultColors.get(canvasCount-1);
         ch.gc = ch.canvas.getGraphicsContext2D();
         ch.opacity = 0.5;
@@ -169,19 +169,39 @@ public class Controller implements Initializable {
     }
 
     void readFile(String filename,Poly poly) {
+        ArrayList<Integer> lx = new ArrayList<Integer>();
+        ArrayList<Integer> ly = new ArrayList<Integer>();
+        int maxX = Integer.MIN_VALUE, minX = Integer.MAX_VALUE;
+        int maxY = Integer.MIN_VALUE, minY = Integer.MAX_VALUE;
+
         try(BufferedReader in = new BufferedReader(new FileReader(filename))) {
             String str;
             while ((str = in.readLine()) != null) {
-                String[] data = str.split("\\s");
-                int x = Integer.parseInt(data[0]);
-                int y = Integer.parseInt(data[1]);
-                poly.addPoint(x,y);
+                    //String[] data = str.split("\\s");
+                    String[] data = str.split("\\|");
+                    int x = Integer.parseInt(data[0]);
+                    int y = Integer.parseInt(data[1]);
+                    lx.add(x);
+                    ly.add(y);
+                    if(x < minX)
+                        minX = x;
+                    if(y < minY)
+                        minY = y;
+                    if(x > maxX)
+                        maxX = x;
+                    if(y > maxY)
+                        maxY = y;
                 }
             } catch (FileNotFoundException fileNotFoundException) {
             fileNotFoundException.printStackTrace();
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
+
+
+        for(int i = 0; i < lx.size(); i++)
+            poly.addPoint(lx.get(i)-minX, ly.get(i)-minY);
+
     }
 
     public void drawGrid(GraphicsContext gc, double step) {
