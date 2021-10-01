@@ -30,7 +30,7 @@ public class Main extends Application {
         primaryStage.setTitle("Polygon Drawing, 2021");
 
 
-        Scene scene = new Scene(root, 1500, 1000, Color.WHITESMOKE);
+        Scene scene = new Scene(root, 1200, 600, Color.WHITESMOKE);
         primaryStage.setScene(scene);
         primaryStage.resizableProperty().setValue(false);
         primaryStage.show();

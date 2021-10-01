@@ -12,5 +12,6 @@ public class CanvasHolder {
         public Color color;
         public double opacity; // 0.0 - 1.0
         public ArrayList<Poly> polygons = new ArrayList<>();
+        public int minX, maxX, minY, maxY;
 }
 
