@@ -203,13 +203,13 @@ public class Poly {
 
         double xratio = xrange / 1000;
         double yratio = yrange / 600;
-        //t.appendTranslation( -minX, -minY );
-        t.appendTranslation(0,0);
+        t.appendTranslation( -minX, -minY );
+        //t.appendTranslation(0,0);
         //t.appendScale( 1/xratio, 1/yratio );
         //t.appendScale(scale,scale);
         gc.setTransform( t );
 
-        Point2D p = t.transform(500,-670);
+        Point2D p = t.transform(minX,minY);
 
 
 
