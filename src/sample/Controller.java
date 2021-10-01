@@ -55,6 +55,10 @@ public class Controller implements Initializable {
     Button btDecScale;
 
     @FXML
+    TextField tfMinX;
+    @FXML
+    TextField tfMinY;
+    @FXML
     TextField tfMaxX;
     @FXML
     TextField tfMaxY;
@@ -104,7 +108,7 @@ public class Controller implements Initializable {
     public void bNewCanvasClick() {
         ++canvasCount;
         CanvasHolder ch = new CanvasHolder();
-        ch.canvas = new Canvas(1200,1000);
+        ch.canvas = new Canvas(1000,600);
         ch.color = defaultColors.get(canvasCount-1);
         ch.gc = ch.canvas.getGraphicsContext2D();
         ch.opacity = 0.5;
@@ -140,12 +144,14 @@ public class Controller implements Initializable {
             activeCanvas.polygons.add(poly);
 
         }
-        poly.calcMinMax();
-        poly.normalize();
+        //poly.calcMinMax();
+        //poly.normalize();
         poly.draw(activeCanvas.gc,scale);
         lvPoly.getItems().add(file.getName());
         tfMaxX.setText(Integer.toString(poly.getMaxX()));
         tfMaxY.setText(Integer.toString(poly.getMaxY()));
+        tfMinX.setText(Integer.toString(poly.getMinX()));
+        tfMinY.setText(Integer.toString(poly.getMinY()));
     }
 
     @FXML
@@ -176,21 +182,39 @@ public class Controller implements Initializable {
 
         try(BufferedReader in = new BufferedReader(new FileReader(filename))) {
             String str;
+            str = in.readLine(); // первая строка - служебная
+            String[] data = str.split(",");
+            minX = Integer.parseInt(data[0]);
+            maxX = Integer.parseInt(data[1]);
+            minY = Integer.parseInt(data[2]);
+            maxY = Integer.parseInt(data[3]);
+
+            activeCanvas.minX = minX;
+            activeCanvas.maxX = maxX;
+            activeCanvas.minY = minY;
+            activeCanvas.maxY = maxY;
+
+            poly.setMaxX(maxX);
+            poly.setMaxY(maxY);
+            poly.setMinX(minX);
+            poly.setMinY(minY);
+
+            String delimeter;
+
+            if(data.length == 5)
+                delimeter = data[4];
+            else
+                delimeter = "\\s";
+
+
             while ((str = in.readLine()) != null) {
-                    //String[] data = str.split("\\s");
-                    String[] data = str.split("\\|");
+                    if(str.length()<=1)
+                        continue;
+                    data = str.split(delimeter);
                     int x = Integer.parseInt(data[0]);
                     int y = Integer.parseInt(data[1]);
                     lx.add(x);
                     ly.add(y);
-                    if(x < minX)
-                        minX = x;
-                    if(y < minY)
-                        minY = y;
-                    if(x > maxX)
-                        maxX = x;
-                    if(y > maxY)
-                        maxY = y;
                 }
             } catch (FileNotFoundException fileNotFoundException) {
             fileNotFoundException.printStackTrace();
@@ -198,9 +222,9 @@ public class Controller implements Initializable {
             ioException.printStackTrace();
         }
 
-
+        // формируем полигон в целочисленных (исходных) координатах
         for(int i = 0; i < lx.size(); i++)
-            poly.addPoint(lx.get(i)-minX, ly.get(i)-minY);
+            poly.addPoint(lx.get(i), ly.get(i));
 
     }
 
@@ -208,9 +232,9 @@ public class Controller implements Initializable {
         gc.setStroke(Color.LIGHTGRAY);
         gc.setLineWidth(1);
 
-        for(double y=0; y<=activeCanvas.canvas.getHeight(); y+=step)
+        for(double y=0; y<activeCanvas.canvas.getHeight(); y+=step)
             gc.strokeLine(1, y, activeCanvas.canvas.getWidth()-1, y);
-        for(double x=0; x<=activeCanvas.canvas.getWidth(); x+=step)
+        for(double x=0; x<activeCanvas.canvas.getWidth(); x+=step)
             gc.strokeLine(x, 1, x, activeCanvas.canvas.getHeight()-1);
     }
 
