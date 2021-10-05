@@ -198,27 +198,26 @@ public class Poly {
         double xrange = maxX - minX;
         double yrange = maxY - minY;
 
-        Affine t = new Affine(1, 0, -minX, 0, 1, -minY);
+        //Affine t = new Affine(1, 0, -minX, 0, 1, -minY);
         //Affine t = new Affine();
-
-        double xratio = xrange / 1000;
-        double yratio = yrange / 600;
-        t.appendTranslation( -minX, -minY );
+        //t.appendTranslation( -minX, -minY );
         //t.appendTranslation(0,0);
         //t.appendScale( 1/xratio, 1/yratio );
         //t.appendScale(scale,scale);
-        gc.setTransform( t );
+        //gc.setTransform( t );
 
-        Point2D p = t.transform(minX,minY);
-
-
-
+        double xratio = xrange / 1000;
+        double yratio = yrange / 600;
 
 
         for (Contour c : contours) {
             double x[] = c.getXArrInt();
             double y[] = c.getYArrInt();
 
+            for(int i = 0; i < x.length; i++) {
+                x[i] = 1000 * (x[i] - minX)/xrange;
+                y[i] = 600  * (y[i] - minY)/yrange;
+            }
 
             gc.fillPolygon(x, y, x.length);
             gc.strokePolygon(x, y, x.length);
