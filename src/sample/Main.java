@@ -25,33 +25,14 @@ import java.io.IOException;
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Polygon Drawing, 2021");
-
+        primaryStage.setTitle("Polygon Drawing, v.0.1");
 
         Scene scene = new Scene(root, 1200, 600, Color.WHITESMOKE);
         primaryStage.setScene(scene);
         primaryStage.resizableProperty().setValue(false);
         primaryStage.show();
-
-
-//        root.setStyle(
-//                "    -fx-background-color: #D3D3D333,\n" +
-//                "        linear-gradient(from 0.5px 0.0px to 10.5px  0.0px, repeat, black 5%, transparent 5%),\n" +
-//                "        linear-gradient(from 0.0px 0.5px to  0.0px 10.5px, repeat, black 5%, transparent 5%);\n"
-//                );
-
-//        Polygon polygon = new Polygon();
-//        polygon.getPoints().addAll(new Double[]{
-//                100.0, 100.0,
-//                200.0, 100.0,
-//                200.0, 200.0,
-//                100.0, 200.0});
-//        polygon.setFill(Color.STEELBLUE);
-//        Group g=new Group();
-//        g.getChildren().add(polygon);
-//        root.getChildren().addAll(g);
     }
 
 

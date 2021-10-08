@@ -51,14 +51,9 @@ class Contour {
         double maxX = poly.getMaxX();
         double minX = poly.getMinX();
 
-        //x'=minx+(maxx-minx)*(x+0.5)/width;
-        //y'=miny+(maxy-miny)*(y+0.5)/height;
-
-
         double[] x = new double[points.size()];
         for(int i=0; i < points.size(); i++ )
             x[i] = points.get(i).x;
-            //x[i] = - minX + (maxX-minX)*(points.get(i).x)/1000;
         return x;
     }
     public double[] getYArrInt() {
@@ -68,7 +63,6 @@ class Contour {
         double[] y = new double[points.size()];
         for(int i=0; i < points.size(); i++ )
             y[i] = points.get(i).y;
-            //y[i] = - minY + (maxY-minY)*(points.get(i).y)/600;
         return y;
     }
     public double[] getXArrDbl(double alphaX) {
@@ -208,7 +202,6 @@ public class Poly {
 
         double xratio = xrange / 1000;
         double yratio = yrange / 600;
-
 
         for (Contour c : contours) {
             double x[] = c.getXArrInt();
